@@ -1,8 +1,7 @@
 <script lang="ts">
-  import type { EnrichedAccount, MockTransaction } from "$lib/types";
+  import type { EnrichedAccount } from "$lib/types";
 
   export let account: EnrichedAccount;
-  export let transactions: MockTransaction[];
 
   const isActive = account.account_status.toUpperCase() === "ACTIVE";
 
@@ -16,13 +15,6 @@
       style: "currency",
       currency,
     }).format(amount);
-  }
-
-  function formatDate(dateStr: string): string {
-    return new Intl.DateTimeFormat("en-US", {
-      month: "short",
-      day: "numeric",
-    }).format(new Date(dateStr + "T00:00:00"));
   }
 </script>
 
@@ -60,34 +52,6 @@
     </div>
     <p class="account-card__type">{account.account_type}</p>
   </div>
-
-  <section class="account-card__transactions" aria-label="Recent transactions">
-    <h3 class="account-card__section-title">Recent Transactions</h3>
-    {#if transactions.length === 0}
-      <p class="account-card__empty">No recent transactions.</p>
-    {:else}
-      <ul class="transaction-list" role="list">
-        {#each transactions as tx (tx.id)}
-          <li class="transaction-list__item">
-            <span class="transaction-list__desc">{tx.description}</span>
-            <span class="transaction-list__meta">
-              <span class="transaction-list__date">{formatDate(tx.date)}</span>
-              <span
-                class="transaction-list__amount"
-                class:credit={tx.type === "credit"}
-                class:debit={tx.type === "debit"}
-                aria-label="{tx.type === 'credit'
-                  ? 'Credit'
-                  : 'Debit'} {formatCurrency(tx.amount)}"
-              >
-                {tx.type === "credit" ? "+" : "−"}{formatCurrency(tx.amount)}
-              </span>
-            </span>
-          </li>
-        {/each}
-      </ul>
-    {/if}
-  </section>
 </article>
 
 <style>
@@ -195,81 +159,6 @@
     letter-spacing: 0.06em;
     margin: 0;
     padding-bottom: var(--s-1);
-  }
-
-  /* Transactions */
-  .account-card__section-title {
-    font-size: var(--text-sm-fs);
-    font-weight: var(--fw-semi-bold);
-    color: var(--title-fg-ci);
-    margin: 0 0 var(--s-3);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-  }
-
-  .account-card__empty {
-    font-size: var(--text-sm-fs);
-    color: var(--text-light-fg-ci);
-    margin: 0;
-  }
-
-  .transaction-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-
-  .transaction-list__item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--s-4);
-    padding: var(--s-2) 0;
-    border-bottom: var(--border-size-thin) solid var(--border-ci-light);
-  }
-
-  .transaction-list__item:last-child {
-    border-bottom: none;
-  }
-
-  .transaction-list__desc {
-    font-size: var(--text-sm-fs);
-    color: var(--text-fg-ci);
-    flex: 1;
-    min-width: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .transaction-list__meta {
-    display: flex;
-    align-items: center;
-    gap: var(--s-3);
-    flex-shrink: 0;
-  }
-
-  .transaction-list__date {
-    font-size: var(--text-xs-fs);
-    color: var(--text-light-fg-ci);
-  }
-
-  .transaction-list__amount {
-    font-size: var(--text-sm-fs);
-    font-weight: var(--fw-medium);
-    min-width: 6rem;
-    text-align: right;
-  }
-
-  .transaction-list__amount.credit {
-    color: var(--c-green-dark);
-  }
-
-  .transaction-list__amount.debit {
-    color: var(--text-fg-ci);
   }
 
   /* Screen reader only */

@@ -5,6 +5,8 @@
   import { enrichAccounts } from "$lib/mockData";
   import type { PageData } from "./$types";
   import type { View } from "$lib/types";
+  import logo from "$lib/assets/logo.svg";
+  import ComponentWrapper from "$lib/components/ComponentWrapper.svelte";
 
   export let data: PageData;
 
@@ -19,11 +21,10 @@
 </script>
 
 <div class="page-shell">
-  <header class="app-header">
+  <ComponentWrapper card>
     <div class="app-header__inner">
       <div class="app-header__brand">
-        <span class="app-header__logo" aria-hidden="true">🏦</span>
-        <span class="app-header__name">NorthWind Bank</span>
+        <img src={logo} alt="NorthWind" class="app-header__logo" />
       </div>
 
       <nav aria-label="Main navigation">
@@ -51,15 +52,15 @@
         </ul>
       </nav>
     </div>
-  </header>
 
-  <main class="page-content" id="main-content">
-    {#if activeView === "accounts"}
-      <AccountsView accounts={enrichedAccounts} error={data.loadError} />
-    {:else}
-      <TransferView accounts={enrichedAccounts} {transfers} />
-    {/if}
-  </main>
+    <main class="page-content" id="main-content">
+      {#if activeView === "accounts"}
+        <AccountsView accounts={enrichedAccounts} error={data.loadError} />
+      {:else}
+        <TransferView accounts={enrichedAccounts} {transfers} />
+      {/if}
+    </main>
+  </ComponentWrapper>
 </div>
 
 <style>
@@ -71,14 +72,6 @@
   }
 
   /* Header */
-  .app-header {
-    background-color: var(--c-white);
-    border-bottom: var(--border-size-thin) solid var(--border-ci-light);
-    position: sticky;
-    top: 0;
-    z-index: var(--layer-2);
-  }
-
   .app-header__inner {
     max-width: 1200px;
     margin: 0 auto;
@@ -96,15 +89,9 @@
   }
 
   .app-header__logo {
-    font-size: 1.25rem;
-    line-height: 1;
-  }
-
-  .app-header__name {
-    font-size: var(--title-fs);
-    font-weight: var(--fw-semi-bold);
-    color: var(--c-blue);
-    letter-spacing: -0.01em;
+    height: 20px;
+    width: auto;
+    display: block;
   }
 
   /* Nav tabs */

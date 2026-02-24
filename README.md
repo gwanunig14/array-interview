@@ -83,10 +83,10 @@ Key design decisions:
 The NorthWind API does not expose the following data, so it is generated
 locally in **`src/lib/mockData.ts`**:
 
-| Mocked element            | Reason                                                                  | Implementation                                                                                                                                                           |
-| ------------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Account display names** | The API returns `account_type` (e.g. `CHECKING`) but no friendly label. | `enrichAccounts()` maps type codes to human-readable names (e.g. "Checking Account"). When multiple accounts share a type, a numeric suffix is appended.                 |
-| **Recent transactions**   | The API has no per-account transaction history endpoint.                | `getMockTransactions()` deterministically picks 5 transactions from a fixed pool using a hash of the account number, so the same account always shows the same activity. |
+| Mocked element            | Reason                                                                  | Implementation                                                                                                                                           |
+| ------------------------- | ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Account display names** | The API returns `account_type` (e.g. `CHECKING`) but no friendly label. | `enrichAccounts()` maps type codes to human-readable names (e.g. "Checking Account"). When multiple accounts share a type, a numeric suffix is appended. |
+| **Recent transactions**   | The API has no per-account transaction history endpoint.                | `getMockTransactions()` returns the full shared transaction pool with sequential dates, displayed once at the accounts view level (not per account).     |
 
 All other data — balances, account numbers, account status, transfer history —
 is sourced directly from the NorthWind API.

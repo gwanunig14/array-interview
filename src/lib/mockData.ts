@@ -81,41 +81,22 @@ const TRANSACTION_POOL: Omit<MockTransaction, "id" | "date">[] = [
   { description: "Monthly Savings Transfer", amount: 300.0, type: "debit" },
 ];
 
-/** Simple deterministic hash for consistent mock data per account. */
-function hashString(s: string): number {
-  let h = 0;
-  for (let i = 0; i < s.length; i++) {
-    h = (Math.imul(31, h) + s.charCodeAt(i)) | 0;
-  }
-  return Math.abs(h);
-}
-
 /**
- * Generates a deterministic list of 5 mock transactions for the given account.
- * The same account number always produces the same transactions.
+ * Returns all mock transactions from the shared pool with sequential dates
+ * (most recent first). Not differentiated by account.
  */
-export function getMockTransactions(accountNumber: string): MockTransaction[] {
-  const seed = hashString(accountNumber);
-  const count = 5;
-  const transactions: MockTransaction[] = [];
-
+export function getMockTransactions(): MockTransaction[] {
   const baseDate = new Date("2026-02-24");
 
-  for (let i = 0; i < count; i++) {
-    const poolIndex = (seed + i * 7) % TRANSACTION_POOL.length;
-    const tx = TRANSACTION_POOL[poolIndex];
-    const daysAgo = i * 3 + (seed % 3);
+  return TRANSACTION_POOL.map((tx, i) => {
     const txDate = new Date(baseDate);
-    txDate.setDate(txDate.getDate() - daysAgo);
-
-    transactions.push({
-      id: `mock-${accountNumber}-${i}`,
+    txDate.setDate(txDate.getDate() - i);
+    return {
+      id: `mock-${i}`,
       description: tx.description,
       amount: tx.amount,
       type: tx.type,
       date: txDate.toISOString().split("T")[0],
-    });
-  }
-
-  return transactions;
+    };
+  });
 }
