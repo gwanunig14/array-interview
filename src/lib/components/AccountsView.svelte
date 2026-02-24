@@ -1,28 +1,14 @@
 <script lang="ts">
   import AccountCard from "./AccountCard.svelte";
-  import { getMockTransactions } from "$lib/mockData";
   import type { EnrichedAccount } from "$lib/types";
+  import { formatCurrency, formatDate } from "$lib/utils";
+  import TransactionCard from "./TransactionCard.svelte";
 
   export let accounts: EnrichedAccount[];
   export let loading = false;
   export let error: string | null = null;
-  const transactions = getMockTransactions();
 
   $: totalBalance = accounts.reduce((sum, a) => sum + a.balance, 0);
-
-  function formatCurrency(amount: number): string {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-    }).format(amount);
-  }
-
-  function formatDate(dateStr: string): string {
-    return new Intl.DateTimeFormat("en-US", {
-      month: "short",
-      day: "numeric",
-    }).format(new Date(dateStr + "T00:00:00"));
-  }
 </script>
 
 <section aria-label="Accounts overview">
@@ -72,35 +58,7 @@
         class="account-columns__column account-card__transactions"
         aria-label="Recent transactions"
       >
-        <h3 class="account-card__section-title">Recent Transactions</h3>
-        {#if transactions.length === 0}
-          <p class="account-card__empty">No recent transactions.</p>
-        {:else}
-          <ul class="transaction-list" role="list">
-            {#each transactions as tx (tx.id)}
-              <li class="transaction-list__item">
-                <span class="transaction-list__desc">{tx.description}</span>
-                <span class="transaction-list__meta">
-                  <span class="transaction-list__date"
-                    >{formatDate(tx.date)}</span
-                  >
-                  <span
-                    class="transaction-list__amount"
-                    class:credit={tx.type === "credit"}
-                    class:debit={tx.type === "debit"}
-                    aria-label="{tx.type === 'credit'
-                      ? 'Credit'
-                      : 'Debit'} {formatCurrency(tx.amount)}"
-                  >
-                    {tx.type === "credit" ? "+" : "−"}{formatCurrency(
-                      tx.amount,
-                    )}
-                  </span>
-                </span>
-              </li>
-            {/each}
-          </ul>
-        {/if}
+        <TransactionCard />
       </div>
     </div>
   {/if}

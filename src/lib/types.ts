@@ -27,6 +27,13 @@ export interface EnrichedAccount extends AccountSummary {
 
 // ─── Mock Transaction ─────────────────────────────────────────────────────────
 
+export type TransactionType =
+  | "restaurant"
+  | "store"
+  | "income"
+  | "payment"
+  | "transfer";
+
 /**
  * A mock recent transaction shown in the AccountCard.
  * The NorthWind API does not expose per-account transaction history,
@@ -38,6 +45,8 @@ export interface MockTransaction {
   amount: number;
   date: string;
   type: "credit" | "debit";
+  transactionType: TransactionType;
+  accountLabel: string;
 }
 
 // ─── Transfer Form ────────────────────────────────────────────────────────────

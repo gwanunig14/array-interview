@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { EnrichedAccount } from "$lib/types";
+  import { formatCurrency } from "$lib/utils";
 
   export let account: EnrichedAccount;
 
@@ -8,13 +9,6 @@
   function maskAccountNumber(num: string): string {
     if (num.length <= 4) return num;
     return "••••" + num.slice(-4);
-  }
-
-  function formatCurrency(amount: number, currency = "USD"): string {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency,
-    }).format(amount);
   }
 </script>
 

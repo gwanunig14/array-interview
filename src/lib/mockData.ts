@@ -14,6 +14,7 @@ import type {
   AccountSummary,
   EnrichedAccount,
   MockTransaction,
+  TransactionType,
 } from "$lib/types";
 
 // ─── Account Display Names ────────────────────────────────────────────────────
@@ -63,27 +64,107 @@ export function enrichAccounts(accounts: AccountSummary[]): EnrichedAccount[] {
 
 // ─── Mock Transactions ────────────────────────────────────────────────────────
 
-const TRANSACTION_POOL: Omit<MockTransaction, "id" | "date">[] = [
-  { description: "Direct Deposit - Payroll", amount: 2450.0, type: "credit" },
-  { description: "Amazon.com", amount: 87.43, type: "debit" },
-  { description: "Netflix Subscription", amount: 15.99, type: "debit" },
-  { description: "Grocery Store", amount: 134.22, type: "debit" },
-  { description: "Gas Station", amount: 58.75, type: "debit" },
-  { description: "Restaurant - Dinner", amount: 46.3, type: "debit" },
-  { description: "Interest Payment", amount: 12.5, type: "credit" },
-  { description: "Utility Bill - Electric", amount: 95.0, type: "debit" },
-  { description: "Online Transfer Received", amount: 500.0, type: "credit" },
-  { description: "Coffee Shop", amount: 6.75, type: "debit" },
-  { description: "Pharmacy", amount: 23.18, type: "debit" },
-  { description: "Streaming Service", amount: 13.99, type: "debit" },
-  { description: "ATM Withdrawal", amount: 200.0, type: "debit" },
-  { description: "Refund - Online Purchase", amount: 42.0, type: "credit" },
-  { description: "Monthly Savings Transfer", amount: 300.0, type: "debit" },
+type PoolEntry = Omit<MockTransaction, "id" | "date" | "accountLabel">;
+
+const ACCOUNT_LABEL_LIST = Object.values(ACCOUNT_TYPE_LABELS);
+
+const TRANSACTION_POOL: PoolEntry[] = [
+  {
+    description: "Direct Deposit - Payroll",
+    amount: 2450.0,
+    type: "credit",
+    transactionType: "income",
+  },
+  {
+    description: "Amazon.com",
+    amount: 87.43,
+    type: "debit",
+    transactionType: "store",
+  },
+  {
+    description: "Netflix Subscription",
+    amount: 15.99,
+    type: "debit",
+    transactionType: "store",
+  },
+  {
+    description: "Grocery Store",
+    amount: 134.22,
+    type: "debit",
+    transactionType: "store",
+  },
+  {
+    description: "Gas Station",
+    amount: 58.75,
+    type: "debit",
+    transactionType: "store",
+  },
+  {
+    description: "Restaurant - Dinner",
+    amount: 46.3,
+    type: "debit",
+    transactionType: "restaurant",
+  },
+  {
+    description: "Interest Payment",
+    amount: 12.5,
+    type: "credit",
+    transactionType: "income",
+  },
+  {
+    description: "Utility Bill - Electric",
+    amount: 95.0,
+    type: "debit",
+    transactionType: "payment",
+  },
+  {
+    description: "Online Transfer Received",
+    amount: 500.0,
+    type: "credit",
+    transactionType: "payment",
+  },
+  {
+    description: "Coffee Shop",
+    amount: 6.75,
+    type: "debit",
+    transactionType: "restaurant",
+  },
+  {
+    description: "Pharmacy",
+    amount: 23.18,
+    type: "debit",
+    transactionType: "store",
+  },
+  {
+    description: "Streaming Service",
+    amount: 13.99,
+    type: "debit",
+    transactionType: "store",
+  },
+  {
+    description: "ATM Withdrawal",
+    amount: 200.0,
+    type: "debit",
+    transactionType: "transfer",
+  },
+  {
+    description: "Refund - Online Purchase",
+    amount: 42.0,
+    type: "credit",
+    transactionType: "payment",
+  },
+  {
+    description: "Monthly Savings Transfer",
+    amount: 300.0,
+    type: "debit",
+    transactionType: "transfer",
+  },
 ];
 
 /**
  * Returns all mock transactions from the shared pool with sequential dates
- * (most recent first). Not differentiated by account.
+ * (most recent first). Each transaction is assigned a random account label
+ * from the known account type labels.
  */
 export function getMockTransactions(): MockTransaction[] {
   const baseDate = new Date("2026-02-24");
@@ -91,11 +172,15 @@ export function getMockTransactions(): MockTransaction[] {
   return TRANSACTION_POOL.map((tx, i) => {
     const txDate = new Date(baseDate);
     txDate.setDate(txDate.getDate() - i);
+    const accountLabel =
+      ACCOUNT_LABEL_LIST[Math.floor(Math.random() * ACCOUNT_LABEL_LIST.length)];
     return {
       id: `mock-${i}`,
       description: tx.description,
       amount: tx.amount,
       type: tx.type,
+      transactionType: tx.transactionType,
+      accountLabel,
       date: txDate.toISOString().split("T")[0],
     };
   });

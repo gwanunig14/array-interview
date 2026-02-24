@@ -2,6 +2,7 @@
   import { enhance } from "$app/forms";
   import { invalidateAll } from "$app/navigation";
   import type { EnrichedAccount, TransferSummary } from "$lib/types";
+  import { formatCurrency, formatDateLong as formatDate } from "$lib/utils";
 
   export let accounts: EnrichedAccount[];
   export let transfers: TransferSummary[];
@@ -95,22 +96,6 @@
           result.data?.error ?? "Transfer failed. Please try again.";
       }
     };
-  }
-
-  function formatCurrency(value: number, currency = "USD"): string {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency,
-    }).format(value);
-  }
-
-  function formatDate(dateStr: string): string {
-    if (!dateStr) return "—";
-    return new Intl.DateTimeFormat("en-US", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-    }).format(new Date(dateStr));
   }
 
   function transferStatusClass(status: string): string {
