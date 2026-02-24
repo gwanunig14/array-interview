@@ -1,7 +1,7 @@
 <script lang="ts">
   import AccountCard from "./AccountCard.svelte";
   import type { EnrichedAccount } from "$lib/types";
-  import { formatCurrency, formatDate } from "$lib/utils";
+  import { formatCurrency } from "$lib/utils";
   import TransactionCard from "./TransactionCard.svelte";
 
   export let accounts: EnrichedAccount[];
@@ -116,6 +116,7 @@
   .account-columns {
     display: flex;
     align-items: flex-start;
+    gap: var(--s-12);
   }
 
   .account-columns__column {
@@ -153,84 +154,17 @@
 
   /* Account grid */
   .accounts-grid {
+    display: grid;
     list-style: none;
     padding: 0;
     margin: 0;
-    gap: var(--s-5);
+    gap: var(--s-2);
+    margin-top: var(--s-12);
   }
 
-  /* Transactions */
-  .account-card__section-title {
-    font-size: var(--text-sm-fs);
-    font-weight: var(--fw-semi-bold);
-    color: var(--title-fg-ci);
-    margin: 0 0 var(--s-3);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-  }
-
-  .account-card__empty {
-    font-size: var(--text-sm-fs);
-    color: var(--text-light-fg-ci);
-    margin: 0;
-  }
-
-  .transaction-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-
-  .transaction-list__item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--s-4);
-    padding: var(--s-2) 0;
-    border-bottom: var(--border-size-thin) solid var(--border-ci-light);
-  }
-
-  .transaction-list__item:last-child {
-    border-bottom: none;
-  }
-
-  .transaction-list__desc {
-    font-size: var(--text-sm-fs);
-    color: var(--text-fg-ci);
-    flex: 1;
-    min-width: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .transaction-list__meta {
-    display: flex;
-    align-items: center;
-    gap: var(--s-3);
-    flex-shrink: 0;
-  }
-
-  .transaction-list__date {
-    font-size: var(--text-xs-fs);
-    color: var(--text-light-fg-ci);
-  }
-
-  .transaction-list__amount {
-    font-size: var(--text-sm-fs);
+  .accounts-header {
+    font-size: var(--text-fs);
     font-weight: var(--fw-medium);
-    min-width: 6rem;
-    text-align: right;
-  }
-
-  .transaction-list__amount.credit {
-    color: var(--c-green-dark);
-  }
-
-  .transaction-list__amount.debit {
-    color: var(--text-fg-ci);
+    margin-bottom: var(--s-6);
   }
 </style>

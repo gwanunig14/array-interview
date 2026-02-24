@@ -59,7 +59,6 @@
             </div>
             <span
               class="transaction-list__item__amount"
-              class:credit={tx.type === "credit"}
               class:debit={tx.type === "debit"}
               aria-label="{tx.type === 'credit'
                 ? 'Credit'
@@ -136,6 +135,7 @@
   }
 
   .transaction-list__item__desc {
+    display: block;
     font-size: var(--text-sm-fs);
     font-weight: var(--fw-medium);
     color: var(--title-fg-ci);
@@ -164,11 +164,7 @@
     margin-left: auto;
   }
 
-  .transaction-list__item__amount.credit {
-    color: var(--c-green-dark);
-  }
-
   .transaction-list__item__amount.debit {
-    color: var(--text-fg-ci);
+    color: var(--c-red-dark);
   }
 </style>

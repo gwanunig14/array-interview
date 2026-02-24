@@ -1,18 +1,20 @@
 /* ====================================== Fonts ====================================== */
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&display=swap");
 
 :root {
   /* ====================================== Colors ====================================== */
 
   --c-white: rgba(255, 255, 255, 1);
-  --c-black: rgba(62, 63, 66, 1);
+  --c-black: rgba(0, 0, 0, 1);
   --c-gray-lightest: rgba(252, 252, 252, 1);
+  --c-gray-lighter-b: rgba(247, 247, 247, 1);
   --c-gray-lighter: rgba(249, 250, 251, 1);
   --c-gray-light: rgba(237, 237, 237, 1);
   --c-gray: rgba(215, 222, 228, 1);
   --c-gray-dark: rgba(138, 149, 168, 1);
-  --c-gray-darker: rgba(0, 0, 0, 0);
-  --c-gray-darkest: rgba(0, 0, 0, 0);
+  --c-gray-darker: rgba(62, 63, 66, 1);
+  --c-gray-darkest: rgba(48, 50, 55, 1);
 
   --c-yellow-lightest: rgba(0, 0, 0, 0);
   --c-yellow-lighter: rgba(0, 0, 0, 0);
@@ -155,6 +157,7 @@
   --text-xxs-fs: 10px;
   --text-xs-fs: 12px;
   --text-sm-fs: 14px;
+  --text-sm-lh: 22px;
   --text-fs: 16px;
   --text-md-fs: 18px;
 

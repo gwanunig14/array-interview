@@ -78,7 +78,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 60px;
+    height: var(--s-6);
   }
 
   .app-header__brand {
@@ -138,7 +138,7 @@
   .page-content {
     max-width: 1200px;
     margin: 0 auto;
-    padding: var(--s-8) var(--s-6);
+    padding: var(--s-6) var(--s-6);
   }
 
   @media (max-width: 640px) {

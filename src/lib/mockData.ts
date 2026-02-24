@@ -14,7 +14,6 @@ import type {
   AccountSummary,
   EnrichedAccount,
   MockTransaction,
-  TransactionType,
 } from "$lib/types";
 
 // ─── Account Display Names ────────────────────────────────────────────────────
