@@ -67,7 +67,6 @@
   .page-shell {
     min-height: 100vh;
     background-color: var(--c-gray-lighter);
-    font-family: var(--text-font), system-ui, sans-serif;
     color: var(--text-fg-ci);
   }
 
@@ -111,7 +110,6 @@
     border-radius: var(--radius-md);
     border: none;
     background: transparent;
-    font-family: var(--text-font), system-ui, sans-serif;
     font-size: var(--text-sm-fs);
     font-weight: var(--fw-medium);
     color: var(--text-light-fg-ci);

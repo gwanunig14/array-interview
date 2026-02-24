@@ -85,7 +85,6 @@
   }
 
   .transaction-card__section-title {
-    font-family: var(--title-font);
     font-size: var(--text-fs);
     font-weight: var(--fw-medium);
     color: var(--title-fg-ci);

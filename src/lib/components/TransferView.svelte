@@ -457,7 +457,6 @@
     background-color: var(--input-bg-ci);
     color: var(--input-fg-ci);
     font-size: var(--input-fs);
-    font-family: var(--input-font);
     width: 100%;
     appearance: auto;
     outline: none;
@@ -523,7 +522,6 @@
     border-radius: var(--input-radius);
     font-size: var(--text-sm-fs);
     font-weight: var(--fw-medium);
-    font-family: var(--text-font);
     cursor: pointer;
     border: none;
     transition:
@@ -626,7 +624,6 @@
 
   .col-amount {
     font-weight: var(--fw-medium);
-    font-family: var(--number-font);
   }
 
   .account-chip {

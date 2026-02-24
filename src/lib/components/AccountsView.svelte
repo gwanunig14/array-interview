@@ -27,7 +27,7 @@
       <div class="account-columns__column">
         <!-- Summary banner -->
         <div class="summary-banner" aria-label="Account summary">
-          <p class="summary-banner__label">Total Balance</p>
+          <p class="summary-banner__label">Total balance</p>
           <p
             class="summary-banner__value"
             aria-label="Total balance {formatCurrency(totalBalance)}"
@@ -35,7 +35,9 @@
             {formatCurrency(totalBalance)}
           </p>
 
-          <p class="summary-banner__label">Across {accounts.length} accounts</p>
+          <p class="summary-banner__accounts">
+            Across {accounts.length} accounts
+          </p>
         </div>
 
         {#if accounts.length === 0}
@@ -114,7 +116,6 @@
   .account-columns {
     display: flex;
     align-items: flex-start;
-    gap: var(--s-6);
   }
 
   .account-columns__column {
@@ -128,25 +129,26 @@
     gap: var(--s-8);
     background-color: var(--c-blue);
     border-radius: var(--radius-xl);
-    padding: var(--s-6) var(--s-8);
+    padding: var(--s-4);
     color: var(--c-white);
     margin-bottom: var(--s-6);
   }
 
   .summary-banner__label {
-    font-size: var(--text-xs-fs);
-    font-weight: var(--fw-medium);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin: 0 0 var(--s-1);
-    opacity: 0.8;
+    font-size: var(--text-sm-fs);
+    font-weight: var(--fw-base);
+    margin-bottom: var(--s-3);
   }
 
   .summary-banner__value {
-    font-size: var(--number-sm-fs);
+    font-size: var(--number-fs);
     font-weight: var(--fw-bold);
-    font-family: var(--number-font);
-    margin: 0;
+    margin-bottom: var(--s-3);
+  }
+
+  .summary-banner__accounts {
+    font-size: var(--text-xs-fs);
+    font-weight: var(--fw-base);
   }
 
   /* Account grid */

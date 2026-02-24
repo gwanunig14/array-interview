@@ -140,7 +140,6 @@
   .account-card__balance {
     font-size: var(--number-sm-fs);
     font-weight: var(--fw-semi-bold);
-    font-family: var(--number-font);
     color: var(--title-fg-ci);
     margin: 0;
   }

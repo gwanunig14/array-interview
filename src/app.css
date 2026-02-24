@@ -1,5 +1,9 @@
 /* Reset */
-@import './lib/styles/reset.css';
+@import "./lib/styles/reset.css";
 
 /* Tokens */
-@import './lib/styles/tokens.css';
+@import "./lib/styles/tokens.css";
+
+body {
+  font-family: "Inter", sans-serif;
+}
