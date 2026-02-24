@@ -1,0 +1,18 @@
+# env files - never commit real keys
+.env
+.env.local
+.env.*.local
+
+# SvelteKit / Vite build output
+.svelte-kit/
+build/
+dist/
+
+# Dependencies
+node_modules/
+
+# Logs
+*.log
+
+# Editor
+.DS_Store
