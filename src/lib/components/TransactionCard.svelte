@@ -159,7 +159,7 @@
   .transaction-list__item__amount {
     font-size: var(--text-sm-fs);
     font-weight: var(--fw-medium);
-    min-width: 6rem;
+    min-width: var(--s-24);
     text-align: right;
     margin-left: auto;
   }

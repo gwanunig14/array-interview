@@ -164,7 +164,7 @@
   .account-picker--open {
     outline: none;
     border-color: var(--c-blue);
-    box-shadow: 0 0 0 3px rgba(22, 101, 216, 0.15);
+    box-shadow: var(--focus-shadow);
   }
 
   .picker-selected {
@@ -180,13 +180,13 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    height: 19px;
+    height: var(--text-lh);
   }
 
   .picker-balance {
     font-size: var(--text-xs-fs);
     color: var(--text-light-fg-ci);
-    height: 15px;
+    height: var(--text-xs-lh);
   }
 
   .picker-placeholder {
@@ -202,18 +202,18 @@
 
   .picker-dropdown {
     position: absolute;
-    top: calc(100% + 4px);
+    top: calc(100% + var(--s-1));
     left: 0;
     right: 0;
     background: var(--c-white);
     border: var(--border-size-thin) solid var(--border-ci);
     border-radius: var(--radius-lg);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-dropdown);
     list-style: none;
     margin: 0;
     padding: var(--s-1) 0;
     z-index: var(--layer-3);
-    max-height: 220px;
+    max-height: var(--dropdown-max-height);
     overflow-y: auto;
   }
 

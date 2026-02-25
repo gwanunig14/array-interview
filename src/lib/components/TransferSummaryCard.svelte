@@ -75,14 +75,14 @@
     font-weight: var(--fw-medium);
     color: var(--c-gray-darker);
     margin: 0 0 var(--s-2);
-    height: 19px;
+    height: var(--text-lh);
   }
 
   .card-subtitle {
     font-size: var(--text-sm-fs);
     color: var(--text-light-fg-ci);
     margin: 0 0 var(--s-6);
-    height: 17px;
+    height: var(--text-sm-lh-tight);
   }
 
   .summary-grid {
@@ -101,20 +101,20 @@
     font-size: var(--text-sm-fs);
     color: var(--text-light-fg-ci);
     margin: 0;
-    height: 17px;
+    height: var(--text-sm-lh-tight);
   }
 
   .summary-account-name {
     font-size: var(--text-sm-fs);
     color: var(--c-gray-darkest);
-    margin-top: 8px;
-    height: 17px;
+    margin-top: var(--s-2);
+    height: var(--text-sm-lh-tight);
   }
 
   .summary-balance {
     font-size: var(--text-sm-fs);
     color: var(--text-light-fg-ci);
-    margin-top: 8px;
-    height: 17px;
+    margin-top: var(--s-2);
+    height: var(--text-sm-lh-tight);
   }
 </style>

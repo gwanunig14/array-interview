@@ -65,7 +65,7 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: var(--s-4);
-    height: 19px;
+    height: var(--text-lh);
   }
 
   .account-card__name {
@@ -90,14 +90,14 @@
     align-items: center;
     justify-content: space-between;
     gap: var(--s-4);
-    height: 26px;
+    height: var(--tag-height);
   }
 
   .account-card__number {
     font-size: var(--text-sm-fs);
     color: var(--text-light-fg-ci);
     margin: 0;
-    letter-spacing: 0.04em;
+    letter-spacing: var(--text-ls-wide);
   }
 
   .account-type {
@@ -108,7 +108,7 @@
     font-family: "Heebo", sans-serif;
     font-size: var(--text-sm-fs);
     font-weight: var(--fw-medium);
-    letter-spacing: -0.02em;
+    letter-spacing: var(--text-ls-tight);
     line-height: var(--text-sm-lh);
     flex-shrink: 0;
     background-color: var(--c-gray-lighter-b);
@@ -128,10 +128,10 @@
   /* Screen reader only */
   .sr-only {
     position: absolute;
-    width: 1px;
-    height: 1px;
+    width: var(--s-025);
+    height: var(--s-025);
     padding: 0;
-    margin: -1px;
+    margin: calc(-1 * var(--s-025));
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;

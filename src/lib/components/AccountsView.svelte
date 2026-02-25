@@ -90,9 +90,9 @@
   /* Spinner */
   .spinner {
     display: block;
-    width: 28px;
-    height: 28px;
-    border: 3px solid var(--c-gray-light);
+    width: var(--spinner-md);
+    height: var(--spinner-md);
+    border: var(--border-size-md) solid var(--c-gray-light);
     border-top-color: var(--c-blue);
     border-radius: 50%;
     animation: spin 0.7s linear infinite;

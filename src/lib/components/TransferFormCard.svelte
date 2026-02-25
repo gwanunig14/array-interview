@@ -223,8 +223,8 @@
   }
 
   .btn:focus-visible {
-    outline: 3px solid var(--c-blue);
-    outline-offset: 2px;
+    outline: var(--focus-border-size) solid var(--focus-border-ci);
+    outline-offset: var(--focus-outline-offset);
   }
 
   .btn--primary {
@@ -247,9 +247,9 @@
 
   .btn-spinner {
     display: inline-block;
-    width: 14px;
-    height: 14px;
-    border: 2px solid rgba(255, 255, 255, 0.4);
+    width: var(--spinner-sm);
+    height: var(--spinner-sm);
+    border: var(--border-size) solid rgba(255, 255, 255, 0.4);
     border-top-color: var(--c-white);
     border-radius: 50%;
     animation: spin 0.7s linear infinite;

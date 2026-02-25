@@ -92,7 +92,7 @@
     font-size: var(--header-xs-fs);
     font-weight: var(--fw-medium);
     color: var(--c-gray-darker);
-    height: 29px;
+    height: var(--header-xs-lh);
     text-align: center;
     margin-bottom: var(--s-2);
   }
@@ -120,7 +120,7 @@
     align-items: baseline;
     gap: var(--s-4);
     border-bottom: var(--border-size-thin) solid var(--border-ci-light);
-    height: 33px;
+    height: var(--detail-row-height);
   }
 
   .detail-row dt,
@@ -128,7 +128,7 @@
     font-size: var(--text-sm-fs);
     color: var(--c-gray-darker);
     white-space: nowrap;
-    height: 17px;
+    height: var(--text-sm-lh-tight);
   }
 
   .action-btn {
@@ -149,7 +149,7 @@
   }
 
   .action-btn:focus-visible {
-    outline: 2px solid var(--primary-ci);
-    outline-offset: 2px;
+    outline: var(--border-size) solid var(--primary-ci);
+    outline-offset: var(--focus-outline-offset);
   }
 </style>

@@ -98,7 +98,7 @@
 
   /* ── Amount input ──────────────────────────────────────────────────────── */
   .amount-input {
-    height: 51px;
+    height: var(--input-lg-height);
     padding: var(--input-padding);
     border: var(--input-border-size) solid var(--input-border-ci);
     border-radius: var(--radius-xl);
@@ -118,7 +118,7 @@
 
   .amount-input:focus {
     border-color: var(--c-blue);
-    box-shadow: 0 0 0 3px rgba(22, 101, 216, 0.15);
+    box-shadow: var(--focus-shadow);
   }
 
   .amount-input--error {
@@ -128,7 +128,7 @@
 
   .amount-input--error:focus {
     border-color: var(--c-red-dark);
-    box-shadow: 0 0 0 3px rgba(245, 55, 88, 0.15);
+    box-shadow: var(--focus-shadow-error);
   }
 
   .input-prefix-wrapper {

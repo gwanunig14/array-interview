@@ -42,7 +42,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 310px;
+    width: var(--card-error-width);
   }
 
   .icon-wrap {
@@ -59,8 +59,8 @@
   }
 
   .x-icon {
-    width: 24px;
-    height: 24px;
+    width: var(--s-6);
+    height: var(--s-6);
   }
 
   .title {
@@ -69,7 +69,7 @@
     color: var(--c-gray-darkest);
     margin-bottom: var(--s-2);
     text-align: center;
-    height: 29px;
+    height: var(--header-xs-lh);
   }
 
   .body-text {
@@ -99,7 +99,7 @@
   }
 
   .action-btn:focus-visible {
-    outline: 2px solid var(--primary-ci);
-    outline-offset: 2px;
+    outline: var(--border-size) solid var(--primary-ci);
+    outline-offset: var(--focus-outline-offset);
   }
 </style>

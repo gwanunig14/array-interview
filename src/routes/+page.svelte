@@ -124,7 +124,7 @@
 
   /* Header */
   .app-header__inner {
-    max-width: 1200px;
+    max-width: var(--layout-max-width);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -145,7 +145,7 @@
   }
 
   .app-header__logo {
-    height: 20px;
+    height: var(--s-5);
     width: auto;
     display: block;
   }
@@ -186,13 +186,13 @@
   }
 
   .nav-tab:focus-visible {
-    outline: 3px solid var(--c-blue);
-    outline-offset: 2px;
+    outline: var(--focus-border-size) solid var(--focus-border-ci);
+    outline-offset: var(--focus-outline-offset);
   }
 
   /* Main content */
   .page-content {
-    max-width: 1200px;
+    max-width: var(--layout-max-width);
     margin: 0 auto;
     padding: var(--s-6) 0 0;
   }

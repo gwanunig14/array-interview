@@ -121,6 +121,7 @@
   --shadow-xl:
     0px 20px 25px -5px rgba(0, 0, 0, 0.1), 0px 8px 10px -6px rgba(0, 0, 0, 0.1);
   --shadow-2xl: 0px 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --shadow-dropdown: 0 4px 16px rgba(0, 0, 0, 0.1);
 
   /* ====================================== Radii ====================================== */
 
@@ -140,10 +141,19 @@
 
   --border-size-thin: 1px;
   --border-size: 2px;
+  --border-size-md: 3px;
   --border-size-thick: 4px;
   --border-ci-light: var(--c-gray-light);
   --border-ci: var(--c-gray);
   --border-ci-dark: var(--c-gray-dark);
+
+  /* ====================================== Focus ====================================== */
+
+  --focus-border-ci: var(--c-blue);
+  --focus-border-size: 3px;
+  --focus-outline-offset: 2px;
+  --focus-shadow: 0 0 0 3px rgba(22, 101, 216, 0.15);
+  --focus-shadow-error: 0 0 0 3px rgba(245, 55, 88, 0.15);
 
   /* ====================================== Paragraph, Title, Header ====================================== */
 
@@ -159,6 +169,9 @@
   --text-sm-fs: 14px;
   --text-fs: 16px;
   --text-sm-lh: 22px;
+  --text-xs-lh: 15px;
+  --text-lh: 19px;
+  --text-sm-lh-tight: 17px;
   --text-md-fs: 18px;
 
   --title-fg-ci: var(--c-black);
@@ -176,7 +189,10 @@
   --header-fg-ci: var(--c-black);
   --header-fw: 500;
   --header-letter-spacing: 0px;
+  --text-ls-wide: 0.04em;
+  --text-ls-tight: -0.02em;
   --header-xs-fs: 24px;
+  --header-xs-lh: 29px;
   --header-sm-fs: 28px;
   --header-md-fs: 32px;
   --header-lg-fs: 40px;
@@ -207,6 +223,7 @@
   --input-fw: 400;
   --input-fs: var(--text-fs);
   --input-height: 42px;
+  --input-lg-height: 51px;
   --input-border-ci: var(--border-ci-dark);
   --input-border-size: var(--border-size-thin);
   --input-radius: var(--primary-radius);
@@ -293,4 +310,20 @@
   --radio-label-checked-fg-ci: var(--text-fg-ci);
   --radio-label-checked-fw: 500;
   --radio-label-gap-width: 12px;
+
+  /* ====================================== Layout ====================================== */
+
+  --layout-max-width: 1200px;
+
+  /* ====================================== Spinners ====================================== */
+
+  --spinner-sm: 14px;
+  --spinner-md: 28px;
+
+  /* ====================================== Component Dimensions ====================================== */
+
+  --dropdown-max-height: 220px;
+  --card-error-width: 310px;
+  --tag-height: 26px;
+  --detail-row-height: 33px;
 }

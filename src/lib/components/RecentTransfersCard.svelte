@@ -65,14 +65,14 @@
     font-weight: var(--fw-medium);
     color: var(--c-gray-darker);
     margin: 0 0 var(--s-2);
-    height: 19px;
+    height: var(--text-lh);
   }
 
   .card-subtitle {
     font-size: var(--text-sm-fs);
     color: var(--text-light-fg-ci);
     margin: 0 0 var(--s-6);
-    height: 17px;
+    height: var(--text-sm-lh-tight);
   }
 
   .transfer-list {
@@ -112,11 +112,11 @@
     font-size: var(--text-sm-fs);
     font-weight: var(--fw-medium);
     color: var(--c-gray-darker);
-    margin: 0 0 2px;
+    margin: 0 0 var(--s-05);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    height: 17px;
+    height: var(--text-sm-lh-tight);
     margin-bottom: var(--s-2);
   }
 
@@ -128,14 +128,14 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    height: 15px;
+    height: var(--text-xs-lh);
   }
 
   .transfer-amount {
     flex-shrink: 0;
     font-size: var(--text-sm-fs);
     font-weight: var(--fw-medium);
-    height: 17px;
+    height: var(--text-sm-lh-tight);
   }
 
   .transfer-amount--negative {
