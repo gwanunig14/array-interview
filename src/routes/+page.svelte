@@ -176,7 +176,7 @@
       color 0.12s ease;
   }
 
-  .nav-tab:hover {
+  .nav-tab:hover:not(.nav-tab--active) {
     background-color: var(--c-gray-lighter);
     color: var(--text-fg-ci);
   }
