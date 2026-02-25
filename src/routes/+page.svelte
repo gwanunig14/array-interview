@@ -68,13 +68,12 @@
     min-height: 100vh;
     background-color: var(--c-gray-lighter);
     color: var(--text-fg-ci);
+    padding: var(--s-6);
   }
 
   /* Header */
   .app-header__inner {
     max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 var(--s-6);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -138,7 +137,7 @@
   .page-content {
     max-width: 1200px;
     margin: 0 auto;
-    padding: var(--s-6) var(--s-6);
+    padding: var(--s-6) 0 0;
   }
 
   @media (max-width: 640px) {

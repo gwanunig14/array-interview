@@ -12,7 +12,7 @@
   --c-gray-lighter: rgba(249, 250, 251, 1);
   --c-gray-light: rgba(237, 237, 237, 1);
   --c-gray: rgba(215, 222, 228, 1);
-  --c-gray-dark: rgba(138, 149, 168, 1);
+  --c-gray-dark: rgba(154, 158, 165, 1);
   --c-gray-darker: rgba(62, 63, 66, 1);
   --c-gray-darkest: rgba(48, 50, 55, 1);
 
@@ -157,8 +157,8 @@
   --text-xxs-fs: 10px;
   --text-xs-fs: 12px;
   --text-sm-fs: 14px;
-  --text-sm-lh: 22px;
   --text-fs: 16px;
+  --text-sm-lh: 22px;
   --text-md-fs: 18px;
 
   --title-fg-ci: var(--c-black);
