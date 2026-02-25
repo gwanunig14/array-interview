@@ -2,6 +2,7 @@
   import { enhance } from "$app/forms";
   import { invalidateAll } from "$app/navigation";
   import { createEventDispatcher } from "svelte";
+  import type { ActionResult } from "@sveltejs/kit";
   import type { EnrichedAccount } from "$lib/types";
   import { formatCurrency } from "$lib/utils";
   import TransferFields from "./TransferFields.svelte";
@@ -84,8 +85,7 @@
       formData.set("toAccountHolder", toAccount.account_holder_name);
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return async ({ result }: { result: any }) => {
+    return async ({ result }: { result: ActionResult }) => {
       submitting = false;
       if (result.type === "success" && result.data?.success) {
         const snapAmount = parseFloat(amount);
