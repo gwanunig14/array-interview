@@ -2,6 +2,8 @@
   import "../app.css";
   import AccountsView from "$lib/components/AccountsView.svelte";
   import TransferView from "$lib/components/TransferView.svelte";
+  import TransferSuccessCard from "$lib/components/TransferSuccessCard.svelte";
+  import TransferErrorCard from "$lib/components/TransferErrorCard.svelte";
   import { enrichAccounts } from "$lib/mockData";
   import type { PageData } from "./$types";
   import type { View } from "$lib/types";
@@ -15,52 +17,88 @@
 
   let activeView: View = "accounts";
 
+  type SuccessPayload = {
+    amount: number;
+    fromName: string;
+    toName: string;
+    date: string;
+    confirmationId: string;
+  };
+
+  let successPayload: SuccessPayload | null = null;
+  let errorMessage: string | null = null;
+
   function setView(view: View) {
     activeView = view;
   }
 </script>
 
 <div class="page-shell">
-  <ComponentWrapper card>
-    <div class="app-header__inner">
-      <div class="app-header__brand">
-        <img src={logo} alt="NorthWind" class="app-header__logo" />
+  {#if successPayload}
+    <div class="outcome-center">
+      <TransferSuccessCard
+        amount={successPayload.amount}
+        fromAccountName={successPayload.fromName}
+        toAccountName={successPayload.toName}
+        transferDate={successPayload.date}
+        confirmationId={successPayload.confirmationId}
+        on:done={() => (successPayload = null)}
+      />
+    </div>
+  {:else if errorMessage}
+    <div class="outcome-center">
+      <TransferErrorCard
+        message={errorMessage}
+        on:back={() => (errorMessage = null)}
+      />
+    </div>
+  {:else}
+    <ComponentWrapper card>
+      <div class="app-header__inner">
+        <div class="app-header__brand">
+          <img src={logo} alt="NorthWind" class="app-header__logo" />
+        </div>
+
+        <nav aria-label="Main navigation">
+          <ul class="nav-tabs" role="list">
+            <li>
+              <button
+                class="nav-tab"
+                class:nav-tab--active={activeView === "accounts"}
+                aria-current={activeView === "accounts" ? "page" : undefined}
+                on:click={() => setView("accounts")}
+              >
+                Accounts
+              </button>
+            </li>
+            <li>
+              <button
+                class="nav-tab"
+                class:nav-tab--active={activeView === "transfer"}
+                aria-current={activeView === "transfer" ? "page" : undefined}
+                on:click={() => setView("transfer")}
+              >
+                Transfer
+              </button>
+            </li>
+          </ul>
+        </nav>
       </div>
 
-      <nav aria-label="Main navigation">
-        <ul class="nav-tabs" role="list">
-          <li>
-            <button
-              class="nav-tab"
-              class:nav-tab--active={activeView === "accounts"}
-              aria-current={activeView === "accounts" ? "page" : undefined}
-              on:click={() => setView("accounts")}
-            >
-              Accounts
-            </button>
-          </li>
-          <li>
-            <button
-              class="nav-tab"
-              class:nav-tab--active={activeView === "transfer"}
-              aria-current={activeView === "transfer" ? "page" : undefined}
-              on:click={() => setView("transfer")}
-            >
-              Transfer
-            </button>
-          </li>
-        </ul>
-      </nav>
-    </div>
-
-    <main class="page-content" id="main-content">
-      {#if activeView === "accounts"}
-        <AccountsView accounts={enrichedAccounts} error={data.loadError} />
-      {:else}
-        <TransferView accounts={enrichedAccounts} {transfers} />
-      {/if}
-    </main>
-  </ComponentWrapper>
+      <main class="page-content" id="main-content">
+        {#if activeView === "accounts"}
+          <AccountsView accounts={enrichedAccounts} error={data.loadError} />
+        {:else}
+          <TransferView
+            accounts={enrichedAccounts}
+            {transfers}
+            on:success={(e) => (successPayload = e.detail)}
+            on:failure={(e) => (errorMessage = e.detail.message)}
+          />
+        {/if}
+      </main>
+    </ComponentWrapper>
+  {/if}
 </div>
 
 <style>
@@ -69,6 +107,13 @@
     background-color: var(--c-gray-lighter);
     color: var(--text-fg-ci);
     padding: var(--s-6);
+  }
+
+  .outcome-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
   }
 
   /* Header */

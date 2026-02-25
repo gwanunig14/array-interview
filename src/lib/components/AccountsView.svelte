@@ -3,6 +3,7 @@
   import type { EnrichedAccount } from "$lib/types";
   import { formatCurrency } from "$lib/utils";
   import TransactionCard from "./TransactionCard.svelte";
+  import ErrorPanel from "./ErrorPanel.svelte";
 
   export let accounts: EnrichedAccount[];
   export let loading = false;
@@ -18,10 +19,7 @@
       <p>Loading your accounts…</p>
     </div>
   {:else if error}
-    <div class="state-panel state-panel--error" role="alert">
-      <p class="state-panel__title">Unable to load accounts</p>
-      <p>{error}</p>
-    </div>
+    <ErrorPanel title="Unable to load accounts" message={error} />
   {:else}
     <div class="account-columns">
       <div class="account-columns__column">
@@ -77,13 +75,6 @@
     text-align: center;
     color: var(--text-light-fg-ci);
     font-size: var(--text-sm-fs);
-  }
-
-  .state-panel--error {
-    background-color: var(--c-red-lighter);
-    border: var(--border-size-thin) solid var(--c-red-light);
-    border-radius: var(--radius-xl);
-    color: var(--c-red-dark);
   }
 
   .state-panel__title {

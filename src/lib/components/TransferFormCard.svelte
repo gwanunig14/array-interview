@@ -1,9 +1,22 @@
 <script lang="ts">
   import { enhance } from "$app/forms";
   import { invalidateAll } from "$app/navigation";
+  import { createEventDispatcher } from "svelte";
   import type { EnrichedAccount } from "$lib/types";
   import { formatCurrency } from "$lib/utils";
   import TransferFields from "./TransferFields.svelte";
+  import FormAlert from "./FormAlert.svelte";
+
+  const dispatch = createEventDispatcher<{
+    success: {
+      amount: number;
+      fromName: string;
+      toName: string;
+      date: string;
+      confirmationId: string;
+    };
+    failure: { message: string };
+  }>();
 
   export let accounts: EnrichedAccount[];
   export let fromAccountId: string;
@@ -12,9 +25,6 @@
 
   let submitting = false;
   let validationError = "";
-  let serverError = "";
-  let successMessage = "";
-  let successTransferId = "";
 
   $: fromAccount = accounts.find((a) => a.account_id === fromAccountId);
   $: toAccount = accounts.find((a) => a.account_id === toAccountId);
@@ -61,8 +71,6 @@
       return;
     }
     validationError = "";
-    serverError = "";
-    successMessage = "";
     submitting = true;
 
     if (fromAccount) {
@@ -80,16 +88,32 @@
     return async ({ result }: { result: any }) => {
       submitting = false;
       if (result.type === "success" && result.data?.success) {
-        const transferredAmount = parseFloat(amount);
-        successMessage = `${formatCurrency(transferredAmount)} successfully transferred.`;
-        successTransferId = result.data.transferId ?? "";
+        const snapAmount = parseFloat(amount);
+        const snapFromName = fromAccount
+          ? `${fromAccount.displayName}...${fromAccount.account_number.slice(-4)}`
+          : "";
+        const snapToName = toAccount
+          ? `${toAccount.displayName}...${toAccount.account_number.slice(-4)}`
+          : "";
+        const snapDate = new Intl.DateTimeFormat("en-US", {
+          month: "long",
+          day: "numeric",
+        }).format(new Date());
         fromAccountId = "";
         toAccountId = "";
         amount = "";
         await invalidateAll();
+        dispatch("success", {
+          amount: snapAmount,
+          fromName: snapFromName,
+          toName: snapToName,
+          date: snapDate,
+          confirmationId: result.data.transferId ?? "",
+        });
       } else if (result.type === "failure") {
-        serverError =
-          result.data?.error ?? "Transfer failed. Please try again.";
+        dispatch("failure", {
+          message: result.data?.error ?? "Transfer failed. Please try again.",
+        });
       }
     };
   }
@@ -100,23 +124,6 @@
     Transfer between accounts
   </h2>
   <p class="section-subtitle">Move money instantly between your accounts.</p>
-
-  {#if successMessage}
-    <div class="alert alert--success" role="alert" aria-live="polite">
-      <p class="alert__title">Transfer Submitted</p>
-      <p>{successMessage}</p>
-      {#if successTransferId}
-        <p class="alert__ref">Reference: <code>{successTransferId}</code></p>
-      {/if}
-    </div>
-  {/if}
-
-  {#if serverError}
-    <div class="alert alert--error" role="alert" aria-live="assertive">
-      <p class="alert__title">Transfer Failed</p>
-      <p>{serverError}</p>
-    </div>
-  {/if}
 
   <form
     method="POST"
@@ -137,9 +144,7 @@
       />
 
       {#if validationError}
-        <div id="form-error" class="alert alert--error" role="alert">
-          {validationError}
-        </div>
+        <FormAlert id="form-error" variant="error" message={validationError} />
       {/if}
 
       <p class="disclaimer">
@@ -178,51 +183,6 @@
     font-weight: var(--fw-base);
     color: var(--c-gray-darker);
     margin-bottom: var(--s-6);
-  }
-
-  /* ── Alerts ────────────────────────────────────────────────────────────── */
-  .alert {
-    border-radius: var(--radius-lg);
-    padding: var(--s-4) var(--s-5);
-    margin-bottom: var(--s-5);
-    font-size: var(--text-sm-fs);
-  }
-
-  .alert p {
-    margin: 0;
-  }
-
-  .alert p + p {
-    margin-top: var(--s-1);
-  }
-
-  .alert__title {
-    font-weight: var(--fw-semi-bold);
-    font-size: var(--text-fs);
-    margin: 0 0 var(--s-1) !important;
-  }
-
-  .alert__ref {
-    margin-top: var(--s-2) !important;
-    color: inherit;
-    opacity: 0.8;
-  }
-
-  .alert__ref code {
-    font-family: ui-monospace, monospace;
-    font-size: var(--text-xs-fs);
-  }
-
-  .alert--success {
-    background-color: var(--c-green-light);
-    color: var(--c-green-dark);
-    border: var(--border-size-thin) solid var(--c-green);
-  }
-
-  .alert--error {
-    background-color: var(--c-red-lighter);
-    color: var(--c-red-dark);
-    border: var(--border-size-thin) solid var(--c-red-light);
   }
 
   /* ── Form card ─────────────────────────────────────────────────────────── */

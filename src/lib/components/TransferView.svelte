@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { createEventDispatcher } from "svelte";
   import type { EnrichedAccount, TransferSummary } from "$lib/types";
   import TransferFormCard from "./TransferFormCard.svelte";
   import TransferSummaryCard from "./TransferSummaryCard.svelte";
@@ -7,6 +8,17 @@
 
   export let accounts: EnrichedAccount[];
   export let transfers: TransferSummary[];
+
+  const dispatch = createEventDispatcher<{
+    success: {
+      amount: number;
+      fromName: string;
+      toName: string;
+      date: string;
+      confirmationId: string;
+    };
+    failure: { message: string };
+  }>();
 
   let fromAccountId = "";
   let toAccountId = "";
@@ -50,6 +62,8 @@
     bind:fromAccountId
     bind:toAccountId
     bind:amount
+    on:success={(e) => dispatch("success", e.detail)}
+    on:failure={(e) => dispatch("failure", e.detail)}
   />
 
   <div class="right-panel">
