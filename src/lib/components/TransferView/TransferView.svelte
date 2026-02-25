@@ -82,7 +82,7 @@
   .transfer-layout {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--s-6);
+    gap: var(--s-12);
     align-items: start;
   }
 

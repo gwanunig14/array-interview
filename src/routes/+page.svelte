@@ -124,7 +124,7 @@
 
   /* Header */
   .app-header__inner {
-    max-width: var(--layout-max-width);
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -163,7 +163,7 @@
   .nav-tab {
     display: inline-flex;
     align-items: center;
-    padding: var(--s-2) var(--s-4);
+    padding-left: var(--s-4);
     border-radius: var(--radius-md);
     border: none;
     background: transparent;
@@ -192,8 +192,7 @@
 
   /* Main content */
   .page-content {
-    max-width: var(--layout-max-width);
-    margin: 0 auto;
+    width: 100%;
     padding: var(--s-6) 0 0;
   }
 
