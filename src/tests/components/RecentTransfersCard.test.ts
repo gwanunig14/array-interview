@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/svelte";
-import RecentTransfersCard from "$lib/components/RecentTransfersCard.svelte";
+import RecentTransfersCard from "$lib/components/TransferView/RecentTransfersCard.svelte";
 import { enrichedOutbound, enrichedInbound } from "../fixtures";
 
 describe("RecentTransfersCard – empty state", () => {

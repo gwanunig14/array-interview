@@ -1,7 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
   import type { EnrichedAccount, TransferSummary } from "$lib/types";
-  import TransferFormCard from "./TransferFormCard.svelte";
+  import TransferFormCard from "./TransferFormCard/TransferFormCard.svelte";
   import TransferSummaryCard from "./TransferSummaryCard.svelte";
   import RecentTransfersCard from "./RecentTransfersCard.svelte";
   import type { EnrichedTransfer } from "./RecentTransfersCard.svelte";

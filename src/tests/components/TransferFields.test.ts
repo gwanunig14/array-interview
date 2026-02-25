@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/svelte";
-import TransferFields from "$lib/components/TransferFields.svelte";
+import TransferFields from "$lib/components/TransferView/TransferFormCard/TransferFields.svelte";
 import { enrichedChecking, enrichedSavings } from "../fixtures";
 import type { EnrichedAccount } from "$lib/types";
 

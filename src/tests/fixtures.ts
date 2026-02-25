@@ -5,7 +5,7 @@
 
 import type { AccountSummary } from "$lib/server/northwind";
 import type { EnrichedAccount, MockTransaction } from "$lib/types";
-import type { EnrichedTransfer } from "$lib/components/RecentTransfersCard.svelte";
+import type { EnrichedTransfer } from "$lib/components/TransferView/RecentTransfersCard.svelte";
 
 // ─── Raw API accounts ─────────────────────────────────────────────────────────
 

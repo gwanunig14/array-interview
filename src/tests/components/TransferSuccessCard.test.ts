@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/svelte";
-import TransferSuccessCard from "$lib/components/TransferSuccessCard.svelte";
+import TransferSuccessCard from "$lib/components/TransferView/TransferSuccessCard.svelte";
 
 const defaultProps = {
   amount: 250,

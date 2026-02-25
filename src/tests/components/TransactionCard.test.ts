@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/svelte";
-import TransactionCard from "$lib/components/TransactionCard.svelte";
+import TransactionCard from "$lib/components/AccountsView/TransactionCard.svelte";
 
 describe("TransactionCard", () => {
   it('renders the "Recent Activity" heading', () => {

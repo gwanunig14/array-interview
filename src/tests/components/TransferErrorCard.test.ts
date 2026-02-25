@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/svelte";
-import TransferErrorCard from "$lib/components/TransferErrorCard.svelte";
+import TransferErrorCard from "$lib/components/TransferView/TransferErrorCard.svelte";
 
 describe("TransferErrorCard – content", () => {
   it('renders the "Transfer Failed" heading', () => {

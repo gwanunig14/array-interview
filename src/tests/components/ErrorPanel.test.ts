@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/svelte";
-import ErrorPanel from "$lib/components/ErrorPanel.svelte";
+import ErrorPanel from "$lib/components/AccountsView/ErrorPanel.svelte";
 
 describe("ErrorPanel", () => {
   it("renders the title prop", () => {

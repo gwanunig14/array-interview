@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/svelte";
-import AccountPickerDropdown from "$lib/components/AccountPickerDropdown.svelte";
+import AccountPickerDropdown from "$lib/components/TransferView/TransferFormCard/AccountPickerDropdown.svelte";
 import {
   enrichedChecking,
   enrichedSavings,

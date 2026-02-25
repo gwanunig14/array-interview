@@ -1,9 +1,9 @@
 <script lang="ts">
   import "../app.css";
-  import AccountsView from "$lib/components/AccountsView.svelte";
-  import TransferView from "$lib/components/TransferView.svelte";
-  import TransferSuccessCard from "$lib/components/TransferSuccessCard.svelte";
-  import TransferErrorCard from "$lib/components/TransferErrorCard.svelte";
+  import AccountsView from "$lib/components/AccountsView/AccountsView.svelte";
+  import TransferView from "$lib/components/TransferView/TransferView.svelte";
+  import TransferSuccessCard from "$lib/components/TransferView/TransferSuccessCard.svelte";
+  import TransferErrorCard from "$lib/components/TransferView/TransferErrorCard.svelte";
   import { enrichAccounts } from "$lib/mockData";
   import type { PageData } from "./$types";
   import type { View } from "$lib/types";

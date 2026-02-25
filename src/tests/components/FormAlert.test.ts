@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/svelte";
-import FormAlert from "$lib/components/FormAlert.svelte";
+import FormAlert from "$lib/components/TransferView/TransferFormCard/FormAlert.svelte";
 
 describe("FormAlert – variant styles", () => {
   it("applies alert--success class for the success variant", () => {

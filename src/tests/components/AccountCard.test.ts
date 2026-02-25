@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/svelte";
-import AccountCard from "$lib/components/AccountCard.svelte";
+import AccountCard from "$lib/components/AccountsView/AccountCard.svelte";
 import {
   enrichedChecking,
   enrichedSavings,
