@@ -124,7 +124,6 @@
   }
 
   .nav-tab--active {
-    background-color: var(--c-blue-lightest);
     color: var(--c-blue);
   }
 

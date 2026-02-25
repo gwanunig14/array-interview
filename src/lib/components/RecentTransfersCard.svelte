@@ -56,21 +56,23 @@
   .recent-card {
     border: var(--border-size-thin) solid var(--border-ci);
     border-radius: var(--radius-xl);
-    padding: var(--s-5);
-    background: var(--c-white);
+    padding: var(--s-4);
+    background: var(--c-gray-lighter);
   }
 
   .card-heading {
     font-size: var(--text-fs);
-    font-weight: var(--fw-semi-bold);
-    color: var(--title-fg-ci);
-    margin: 0 0 var(--s-1);
+    font-weight: var(--fw-medium);
+    color: var(--c-gray-darker);
+    margin: 0 0 var(--s-2);
+    height: 19px;
   }
 
   .card-subtitle {
     font-size: var(--text-sm-fs);
     color: var(--text-light-fg-ci);
-    margin: 0 0 var(--s-4);
+    margin: 0 0 var(--s-6);
+    height: 17px;
   }
 
   .transfer-list {
@@ -79,25 +81,26 @@
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: var(--s-4);
+    gap: var(--s-6);
   }
 
   .transfer-item {
     display: flex;
-    align-items: center;
-    gap: var(--s-3);
+    align-items: flex-start;
+    gap: var(--s-4);
   }
 
   .transfer-icon {
     flex-shrink: 0;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: var(--c-gray-lighter);
+    width: var(--s-8);
+    height: var(--s-8);
+    border-radius: var(--radius-round);
+    background: var(--c-gray-light);
     border: var(--border-size-thin) solid var(--border-ci);
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: var(--s-2-5);
   }
 
   .transfer-info {
@@ -108,26 +111,31 @@
   .transfer-title {
     font-size: var(--text-sm-fs);
     font-weight: var(--fw-medium);
-    color: var(--title-fg-ci);
+    color: var(--c-gray-darker);
     margin: 0 0 2px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    height: 17px;
+    margin-bottom: var(--s-2);
   }
 
   .transfer-meta {
     font-size: var(--text-xs-fs);
+    font-weight: var(--fw-medium);
     color: var(--text-light-fg-ci);
     margin: 0;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    height: 15px;
   }
 
   .transfer-amount {
     flex-shrink: 0;
     font-size: var(--text-sm-fs);
-    font-weight: var(--fw-semi-bold);
+    font-weight: var(--fw-medium);
+    height: 17px;
   }
 
   .transfer-amount--negative {
@@ -135,7 +143,7 @@
   }
 
   .transfer-amount--positive {
-    color: var(--c-green-dark);
+    color: var(--c-black);
   }
 
   .empty-state {
