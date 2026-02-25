@@ -115,6 +115,15 @@
     min-width: 0;
   }
 
+  @media (max-width: 640px) {
+    .account-columns {
+      flex-direction: column;
+      align-items: stretch;
+      gap: var(--s-6);
+      padding: 0 var(--s-6);
+    }
+  }
+
   /* Summary banner */
   .summary-banner {
     align-items: center;

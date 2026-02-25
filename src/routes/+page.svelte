@@ -109,6 +109,12 @@
     padding: var(--s-6);
   }
 
+  @media (max-width: 640px) {
+    .page-shell {
+      padding: 0;
+    }
+  }
+
   .outcome-center {
     display: flex;
     justify-content: center;
@@ -123,6 +129,13 @@
     align-items: center;
     justify-content: space-between;
     height: var(--s-6);
+  }
+
+  @media (max-width: 640px) {
+    .app-header__inner {
+      padding: var(--s-6);
+      height: auto;
+    }
   }
 
   .app-header__brand {
@@ -186,7 +199,7 @@
 
   @media (max-width: 640px) {
     .page-content {
-      padding: var(--s-5) var(--s-4);
+      padding: var(--s-6) 0 0;
     }
   }
 </style>

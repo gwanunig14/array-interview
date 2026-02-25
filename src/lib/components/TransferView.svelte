@@ -92,6 +92,17 @@
     }
   }
 
+  @media (max-width: 640px) {
+    .transfer-layout {
+      padding: 0 var(--s-6);
+      gap: var(--s-6);
+    }
+
+    .right-panel {
+      gap: var(--s-6);
+    }
+  }
+
   .right-panel {
     display: flex;
     flex-direction: column;
