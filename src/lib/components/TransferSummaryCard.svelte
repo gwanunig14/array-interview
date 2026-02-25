@@ -18,41 +18,45 @@
   <div class="summary-grid">
     <div class="summary-col">
       <p class="summary-amount">
-        {#if fromAccount && !isNaN(amountNum) && amountNum > 0}
+        {#if fromAccount}
           {formatCurrency(amountNum)} From
         {:else}
           From
         {/if}
       </p>
-      <p class="summary-account-name">
-        {fromAccount ? fromAccount.displayName : "—"}
-      </p>
+      {#if fromAccount && !isNaN(amountNum) && amountNum > 0}
+        <p class="summary-account-name">
+          {fromAccount.displayName}
+        </p>
+      {:else}
+        <p class="summary-account-name summary-account-name--empty">-</p>
+      {/if}
       {#if newFromBalance !== null}
         <p class="summary-balance">
           New balance · {formatCurrency(newFromBalance)}
         </p>
-      {:else}
-        <p class="summary-balance summary-balance--empty">—</p>
       {/if}
     </div>
 
     <div class="summary-col">
       <p class="summary-amount">
-        {#if toAccount && !isNaN(amountNum) && amountNum > 0}
+        {#if toAccount}
           {formatCurrency(amountNum)} To
         {:else}
           To
         {/if}
       </p>
-      <p class="summary-account-name">
-        {toAccount ? toAccount.displayName : "—"}
-      </p>
+      {#if toAccount && !isNaN(amountNum) && amountNum > 0}
+        <p class="summary-account-name">
+          {toAccount.displayName}
+        </p>
+      {:else}
+        <p class="summary-account-name summary-account-name--empty">-</p>
+      {/if}
       {#if newToBalance !== null}
         <p class="summary-balance">
           New balance · {formatCurrency(newToBalance)}
         </p>
-      {:else}
-        <p class="summary-balance summary-balance--empty">—</p>
       {/if}
     </div>
   </div>
@@ -62,21 +66,23 @@
   .summary-card {
     border: var(--border-size-thin) solid var(--border-ci);
     border-radius: var(--radius-xl);
-    padding: var(--s-5);
-    background: var(--c-white);
+    padding: var(--s-4);
+    background: var(--c-gray-lighter);
   }
 
   .card-heading {
     font-size: var(--text-fs);
-    font-weight: var(--fw-semi-bold);
-    color: var(--title-fg-ci);
-    margin: 0 0 var(--s-1);
+    font-weight: var(--fw-medium);
+    color: var(--c-gray-darker);
+    margin: 0 0 var(--s-2);
+    height: 19px;
   }
 
   .card-subtitle {
     font-size: var(--text-sm-fs);
     color: var(--text-light-fg-ci);
-    margin: 0 0 var(--s-4);
+    margin: 0 0 var(--s-6);
+    height: 17px;
   }
 
   .summary-grid {
@@ -93,25 +99,22 @@
 
   .summary-amount {
     font-size: var(--text-sm-fs);
-    font-weight: var(--fw-medium);
-    color: var(--text-fg-ci);
+    color: var(--text-light-fg-ci);
     margin: 0;
+    height: 17px;
   }
 
   .summary-account-name {
     font-size: var(--text-sm-fs);
-    font-weight: var(--fw-semi-bold);
-    color: var(--title-fg-ci);
-    margin: 0;
+    color: var(--c-gray-darkest);
+    margin-top: 8px;
+    height: 17px;
   }
 
   .summary-balance {
-    font-size: var(--text-xs-fs);
+    font-size: var(--text-sm-fs);
     color: var(--text-light-fg-ci);
-    margin: 0;
-  }
-
-  .summary-balance--empty {
-    color: var(--c-gray-dark);
+    margin-top: 8px;
+    height: 17px;
   }
 </style>
