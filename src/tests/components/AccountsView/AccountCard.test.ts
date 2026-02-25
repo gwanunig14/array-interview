@@ -5,7 +5,7 @@ import {
   enrichedChecking,
   enrichedSavings,
   enrichedInactive,
-} from "../fixtures";
+} from "../../fixtures";
 import type { EnrichedAccount } from "$lib/types";
 
 describe("AccountCard – content", () => {

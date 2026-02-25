@@ -5,7 +5,7 @@ import {
   enrichedChecking,
   enrichedSavings,
   enrichedInactive,
-} from "../fixtures";
+} from "../../../fixtures";
 
 const defaultProps = {
   accounts: [enrichedChecking, enrichedSavings, enrichedInactive],

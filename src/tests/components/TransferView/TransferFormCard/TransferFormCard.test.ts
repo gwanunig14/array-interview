@@ -18,7 +18,7 @@ vi.mock("$app/navigation", () => ({
 }));
 
 import TransferFormCard from "$lib/components/TransferView/TransferFormCard/TransferFormCard.svelte";
-import { enrichedChecking, enrichedSavings } from "../fixtures";
+import { enrichedChecking, enrichedSavings } from "../../../fixtures";
 
 const defaultProps = {
   accounts: [enrichedChecking, enrichedSavings],

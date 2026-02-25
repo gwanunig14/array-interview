@@ -21,7 +21,7 @@ import {
   enrichedChecking,
   enrichedSavings,
   enrichedOutbound,
-} from "../fixtures";
+} from "../../fixtures";
 import type { EnrichedAccount } from "$lib/types";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
