@@ -1,14 +1,29 @@
 # NorthWind Banking App
 
-A SvelteKit + TypeScript application integrating with the NorthWind Bank API.
-It provides two views — **Accounts** and **Balance Transfer** — accessible via
-the top navigation.
+SvelteKit + TypeScript banking UI that integrates with the NorthWind API.
+The app has two user-facing workflows:
+
+- **Accounts**: account list + balances + recent activity display.
+- **Transfer**: account-to-account transfer form + transfer summary + recent transfers.
+
+This README is intended as a handoff guide for future maintainers.
 
 ---
 
-## Getting Started
+## Runtime and Prerequisites
 
-Ensure you're using **Node.js ^24.12.0**.
+- Node.js: **^24.12.0**
+- Package manager: **npm**
+- Required API credentials in `.env`:
+
+```env
+NORTHWIND_API_BASE_URL=https://<your-northwind-api-host>
+NORTHWIND_API_KEY=<your-api-key>
+```
+
+---
+
+## Quick Start
 
 1. Install dependencies:
 
@@ -16,84 +31,241 @@ Ensure you're using **Node.js ^24.12.0**.
    npm install
    ```
 
-2. Create a `.env` file in the project root with your NorthWind credentials:
+2. Create `.env` in the project root (see above).
 
-   ```env
-   NORTHWIND_API_BASE_URL=https://<your-northwind-api-host>
-   NORTHWIND_API_KEY=<your-api-key>
-   ```
-
-3. Start the development server:
+3. Start the app:
 
    ```sh
    npm run dev
-   # or open in a new tab
+   ```
+
+4. Optional: open browser automatically:
+
+   ```sh
    npm run dev -- --open
    ```
 
 ---
 
-## Building for Production
+## npm Commands
+
+### Development
+
+- `npm run dev`
+  - Starts Vite dev server.
+- `npm run build`
+  - Creates production build.
+- `npm run preview`
+  - Serves the production build locally.
+
+### Type and quality checks
+
+- `npm run prepare`
+  - Runs SvelteKit sync step (normally called automatically by npm lifecycle).
+- `npm run check`
+  - Runs `svelte-kit sync` + `svelte-check` against `tsconfig.json`.
+- `npm run check:watch`
+  - Same as above in watch mode.
+- `npm run lint`
+  - Runs Prettier check and ESLint.
+- `npm run format`
+  - Applies Prettier formatting across the repo.
+
+### Testing
+
+- `npm test`
+  - Runs all Vitest tests once.
+- `npm run test:watch`
+  - Runs Vitest in watch mode.
+- `npm run test:coverage`
+  - Runs tests with coverage output.
+
+### Recommended local verification flow before merging
 
 ```sh
-npm run build
-npm run preview   # preview the production build locally
+npm run check && npm run lint && npm test
 ```
 
 ---
 
-## Architecture
+## Project Organization
 
-```
+```txt
 src/
-├── lib/
-│   ├── mockData.ts          # Mock data utilities (see below)
-│   ├── types.ts             # App-level TypeScript types
-│   ├── server/
-│   │   └── northwind.ts     # NorthWind API client + all server-side types
-│   ├── components/
-│   │   ├── AccountCard.svelte     # Single account card with recent activity
-│   │   ├── AccountsView.svelte    # Accounts overview (summary + card grid)
-│   │   └── TransferView.svelte    # Balance transfer form + recent transfers
-│   └── styles/
-│       ├── reset.css
-│       └── tokens.css       # Design tokens (CSS variables)
-└── routes/
-    ├── +page.server.ts      # Server load function + transfer form action
-    └── +page.svelte         # Root page — view state, nav, data wiring
+  app.css                      # global app styles
+  lib/
+    assets/                    # static assets (logo, etc.)
+    components/
+      ComponentWrapper.svelte
+      AccountsView/            # accounts screen and subcomponents
+      TransferView/            # transfer screen and subcomponents
+    server/
+      northwind.ts             # API client + API contract types
+    styles/
+      reset.css
+      tokens.css               # design tokens (CSS variables)
+    mockData.ts                # locally generated fallback/mock display data
+    types.ts                   # app-level shared TS types
+    utils.ts                   # formatting utilities
+  routes/
+    +page.server.ts            # server load + transfer action
+    +page.svelte               # top-level page shell + view switch
+  tests/                       # unit/component/server tests
 ```
 
-Key design decisions:
+### Folder responsibilities
 
-- **Server-side load** (`+page.server.ts`) fetches all accounts and recent
-  transfers in parallel on each page load. A top-level try/catch surfaces API
-  errors gracefully without crashing the page.
-- **Form action** (`?/transfer`) handles the transfer submission server-side
-  and returns typed success or failure data consumed by `TransferView` via
-  `use:enhance`.
-- **`invalidateAll()`** is called after a successful transfer so SvelteKit
-  re-runs the load function and refreshes live account balances.
-- The two views share the same route; active view is local component state in
-  `+page.svelte`.
-
----
-
-## Mock Data
-
-The NorthWind API does not expose the following data, so it is generated
-locally in **`src/lib/mockData.ts`**:
-
-| Mocked element            | Reason                                                                  | Implementation                                                                                                                                           |
-| ------------------------- | ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Account display names** | The API returns `account_type` (e.g. `CHECKING`) but no friendly label. | `enrichAccounts()` maps type codes to human-readable names (e.g. "Checking Account"). When multiple accounts share a type, a numeric suffix is appended. |
-| **Recent transactions**   | The API has no per-account transaction history endpoint.                | `getMockTransactions()` returns the full shared transaction pool with sequential dates, displayed once at the accounts view level (not per account).     |
-
-All other data — balances, account numbers, account status, transfer history —
-is sourced directly from the NorthWind API.
+- `src/routes/+page.server.ts`
+  - Handles server-side data loading and form action execution.
+  - Is the central place for transfer input validation + action result shaping.
+- `src/lib/server/northwind.ts`
+  - Encapsulates external API calls and response/error typing.
+  - Prevents components from calling `fetch` directly.
+- `src/lib/components/**`
+  - Pure presentation + interaction logic.
+  - Emits events upward instead of coupling to API internals.
+- `src/tests/**`
+  - Mirrors implementation layout (components, routes, lib, server).
 
 ---
 
-## Notes on this project
+## Coding Approaches and Conventions
 
-This project uses **Svelte v4**. Legacy docs:
-<https://svelte.dev/docs/svelte/legacy-overview>
+### 1) Server-first data flow
+
+- Use SvelteKit server load/actions for any API/network interaction.
+- Keep credentials and outbound API calls in server-only code.
+- Return typed, minimal payloads to the client UI.
+
+### 2) Component communication
+
+- Child components communicate upward using `createEventDispatcher`.
+- Parent containers (`TransferView`, root `+page.svelte`) orchestrate success/error UI state.
+- Keep reusable components focused on a single responsibility.
+
+### 3) Validation layering
+
+- Client-side pre-validation in transfer form (`validateForm`) for immediate UX feedback.
+- Server-side validation in `actions.transfer` as source of truth.
+- Never rely solely on client checks for correctness.
+
+### 4) Type usage
+
+- API contracts live in `src/lib/server/northwind.ts`.
+- App-level aliases/enriched types live in `src/lib/types.ts`.
+- Prefer explicit interfaces and discriminated action payload shapes over `any`.
+
+### 5) Styling system
+
+- Use tokens from `src/lib/styles/tokens.css` and shared reset styles.
+- Existing code uses CSS variables consistently; follow that pattern.
+- Avoid ad-hoc theme values when a token already exists.
+
+---
+
+## Error Handling Strategy
+
+### API client-level (`northwind.ts`)
+
+- `request<T>()` wraps `fetch`.
+- Non-2xx responses throw `NorthwindApiError` with:
+  - HTTP status
+  - parsed API error body (fallback if JSON parse fails)
+
+### Page load-level (`+page.server.ts`)
+
+- Load fetches accounts + transfers in parallel with `Promise.all`.
+- On failure:
+  - returns empty typed fallback datasets
+  - sets `loadError` message
+  - prevents hard page failure
+
+### Action-level (`actions.transfer`)
+
+- Input validation failures return `fail(400, { error })`.
+- Upstream/API failures return `fail(500, { error })`.
+- Success returns a compact payload consumed by enhanced form handlers.
+
+### UI-level (`TransferFormCard` and page shell)
+
+- Form-level validation errors shown inline.
+- Action failures trigger failure event and error card UI.
+- Successful transfers trigger success card, then data refresh with `invalidateAll()`.
+
+---
+
+## Testing Guide
+
+### Test stack
+
+- Runner: **Vitest**
+- Component testing: **@testing-library/svelte**
+- DOM environment: **jsdom**
+- Global setup: `src/tests/setup.ts`
+
+### Test organization
+
+- `src/tests/components/**`: UI component behavior and rendering.
+- `src/tests/routes/page.server.test.ts`: server load/action logic.
+- `src/tests/lib/**`: utility and mock data behavior.
+- `src/tests/server/**`: API client behavior and request shaping.
+
+### Notable test techniques in this repo
+
+- API and framework functions are mocked in server tests (`$lib/server/northwind`, `fail`).
+- `window.matchMedia` is stubbed globally for jsdom compatibility.
+- SVG imports are stubbed in Vitest via custom Vite plugin in `vite.config.ts`.
+
+### Running targeted tests
+
+Use Vitest path filters, for example:
+
+```sh
+npx vitest run src/tests/routes/page.server.test.ts
+```
+
+---
+
+## Mock Data Policy
+
+The API does **not** provide all fields needed for UX display.
+`src/lib/mockData.ts` intentionally fills those gaps:
+
+- Human-friendly account display names from account type values.
+- Generated recent transaction feed for account cards.
+
+When extending mock behavior, keep it centralized in `mockData.ts` and clearly documented.
+
+---
+
+## Common Maintenance Tasks
+
+### Add a new API-backed feature
+
+1. Add/extend API type(s) and endpoint method(s) in `src/lib/server/northwind.ts`.
+2. Read/write through `+page.server.ts` load/actions.
+3. Keep components presentation-focused; pass down typed props.
+4. Add or update tests in the mirrored `src/tests/**` area.
+
+### Add a new component
+
+1. Place it under the closest feature folder in `src/lib/components`.
+2. Keep the public prop/event interface explicit and typed.
+3. Add a colocated test under matching path in `src/tests/components/**`.
+
+### Debug transfer failures quickly
+
+1. Check browser/UI message for client validation errors.
+2. Inspect server action response from `actions.transfer`.
+3. Confirm `.env` values are present and valid.
+4. Verify API health/credentials with a simple endpoint call if needed.
+
+---
+
+## Known Technical Constraints
+
+- App is built on **Svelte 4** conventions.
+- Transfer reference IDs are generated per submission in server action.
+- Recent account transactions are mock/generated, not API-backed.
+
+Svelte 4 legacy docs: <https://svelte.dev/docs/svelte/legacy-overview>
