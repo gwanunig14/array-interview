@@ -57,13 +57,12 @@
     <span class="input-prefix" aria-hidden="true">$</span>
     <input
       id="transfer-amount"
-      type="number"
+      type="text"
+      inputmode="decimal"
       name="amount"
       class="amount-input amount-input--with-prefix"
       class:amount-input--error={exceedsBalance}
       bind:value={amount}
-      min="0.01"
-      step="0.01"
       placeholder="0.00"
       required
       aria-required="true"

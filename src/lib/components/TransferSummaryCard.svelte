@@ -18,13 +18,13 @@
   <div class="summary-grid">
     <div class="summary-col">
       <p class="summary-amount">
-        {#if fromAccount}
+        {#if fromAccount && !isNaN(amountNum) && amountNum > 0}
           {formatCurrency(amountNum)} From
         {:else}
           From
         {/if}
       </p>
-      {#if fromAccount && !isNaN(amountNum) && amountNum > 0}
+      {#if fromAccount}
         <p class="summary-account-name">
           {fromAccount.displayName}
         </p>
@@ -40,13 +40,13 @@
 
     <div class="summary-col">
       <p class="summary-amount">
-        {#if toAccount}
+        {#if toAccount && !isNaN(amountNum) && amountNum > 0}
           {formatCurrency(amountNum)} To
         {:else}
           To
         {/if}
       </p>
-      {#if toAccount && !isNaN(amountNum) && amountNum > 0}
+      {#if toAccount}
         <p class="summary-account-name">
           {toAccount.displayName}
         </p>

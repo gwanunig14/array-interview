@@ -105,10 +105,10 @@
             role="option"
             aria-selected={account.account_id === selectedId}
             tabindex={isDisabled(account) ? -1 : 0}
-            on:click={() => {
+            on:click|stopPropagation={() => {
               if (!isDisabled(account)) handleSelect(account.account_id);
             }}
-            on:keydown={(e) => {
+            on:keydown|stopPropagation={(e) => {
               if (e.key === "Enter" || e.key === " ") {
                 e.preventDefault();
                 if (!isDisabled(account)) handleSelect(account.account_id);
