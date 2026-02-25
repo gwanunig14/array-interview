@@ -176,6 +176,7 @@
     font-weight: var(--fw-medium);
     color: var(--c-gray-darker);
     margin-bottom: var(--s-2);
+    height: var(--text-lh);
   }
 
   .section-subtitle {
@@ -183,6 +184,7 @@
     font-weight: var(--fw-base);
     color: var(--c-gray-darker);
     margin-bottom: var(--s-6);
+    height: var(--text-sm-lh-tight);
   }
 
   /* ── Form card ─────────────────────────────────────────────────────────── */
@@ -202,6 +204,7 @@
     color: var(--text-light-fg-ci);
     text-align: center;
     margin: var(--s-2) 0;
+    height: var(--text-xs-lh);
   }
 
   .btn {

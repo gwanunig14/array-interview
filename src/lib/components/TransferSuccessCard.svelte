@@ -102,6 +102,7 @@
     color: var(--c-gary-darker);
     margin: 0 0 var(--s-12);
     text-align: center;
+    height: var(--text-sm-lh-tight);
   }
 
   .detail-list {

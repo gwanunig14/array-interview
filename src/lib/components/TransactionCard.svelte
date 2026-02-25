@@ -88,12 +88,14 @@
     font-weight: var(--fw-medium);
     color: var(--title-fg-ci);
     margin: 0 0 var(--s-2);
+    height: var(--text-lh);
   }
 
   .transaction-card__empty {
     font-size: var(--text-sm-fs);
     color: var(--text-light-fg-ci);
     margin: 0;
+    height: var(--text-sm-lh-tight);
   }
 
   .transaction-card__list-title {
@@ -101,6 +103,7 @@
     font-size: var(--text-sm-fs);
     font-weight: var(--text-fw);
     margin-bottom: var(--s-6);
+    height: var(--text-sm-lh-tight);
   }
 
   .transaction-list {
@@ -115,7 +118,6 @@
   .transaction-list__item {
     display: flex;
     align-items: center;
-    padding: var(--s-2);
     height: var(--s-10);
   }
 
@@ -145,6 +147,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     margin-bottom: var(--s-2);
+    height: var(--text-sm-lh-tight);
   }
 
   .transaction-list__item__meta {
@@ -154,6 +157,7 @@
     font-weight: var(--fw-medium);
     flex-shrink: 0;
     color: var(--text-light-fg-ci);
+    height: var(--text-xs-lh);
   }
 
   .transaction-list__item__amount {
@@ -162,6 +166,7 @@
     min-width: var(--s-24);
     text-align: right;
     margin-left: auto;
+    height: var(--text-sm-lh-tight);
   }
 
   .transaction-list__item__amount.debit {

@@ -36,6 +36,7 @@
     font-weight: var(--fw-semi-bold);
     font-size: var(--text-fs);
     margin: 0;
+    height: var(--text-lh);
   }
 
   .state-panel p:not(.state-panel__title) {

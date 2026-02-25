@@ -61,6 +61,7 @@
     font-weight: var(--fw-semi-bold);
     font-size: var(--text-fs);
     margin: 0 0 var(--s-1);
+    height: var(--text-lh);
   }
 
   .alert__ref {

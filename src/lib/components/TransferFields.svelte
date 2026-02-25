@@ -88,12 +88,14 @@
   .form-label {
     font-size: var(--text-sm-fs);
     color: var(--c-gray-darker);
+    height: var(--text-sm-lh-tight);
   }
 
   .form-error-inline {
     font-size: var(--text-xs-fs);
     color: var(--c-red-dark);
     margin: 0;
+    height: var(--text-xs-lh);
   }
 
   /* ── Amount input ──────────────────────────────────────────────────────── */

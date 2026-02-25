@@ -72,6 +72,7 @@
     font-size: var(--title-fs);
     font-weight: var(--fw-base);
     color: var(--title-fg-ci);
+    height: var(--text-lh);
   }
 
   .account-card__balance {
@@ -79,6 +80,7 @@
     font-size: var(--title-fs);
     font-weight: var(--fw-medium);
     color: var(--c-gray-darkest);
+    height: var(--text-lh);
   }
 
   .account-card__balance-negative {
@@ -98,6 +100,7 @@
     color: var(--text-light-fg-ci);
     margin: 0;
     letter-spacing: var(--text-ls-wide);
+    height: var(--text-sm-lh-tight);
   }
 
   .account-type {
@@ -123,6 +126,7 @@
     font-weight: var(--fw-base);
     flex-shrink: 0;
     color: var(--text-light-fg-ci);
+    height: var(--text-sm-lh-tight);
   }
 
   /* Screen reader only */

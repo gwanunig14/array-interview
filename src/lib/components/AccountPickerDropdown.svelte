@@ -135,6 +135,7 @@
   .form-label {
     font-size: var(--text-sm-fs);
     color: var(--c-gray-darker);
+    height: var(--text-sm-lh-tight);
   }
 
   /* ── Account picker ────────────────────────────────────────────────────── */
@@ -192,6 +193,7 @@
   .picker-placeholder {
     font-size: var(--text-fs);
     color: var(--c-blue);
+    height: var(--text-lh);
   }
 
   .picker-chevron {
@@ -255,5 +257,6 @@
     color: var(--text-light-fg-ci);
     margin-left: var(--s-3);
     flex-shrink: 0;
+    height: var(--text-xs-lh);
   }
 </style>
