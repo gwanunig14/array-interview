@@ -19,9 +19,10 @@ describe("AccountCard – content", () => {
     expect(screen.getByText("$5,000.00")).toBeInTheDocument();
   });
 
-  it("renders the account type", () => {
-    render(AccountCard, { account: enrichedChecking });
-    expect(screen.getByText(/CHECKING/)).toBeInTheDocument();
+  it("renders the account type in title case", () => {
+    const { container } = render(AccountCard, { account: enrichedChecking });
+    const typeSpan = container.querySelector(".account-type");
+    expect(typeSpan?.textContent?.trim()).toBe("Checking");
   });
 
   it('shows "Available" for an ACTIVE account', () => {

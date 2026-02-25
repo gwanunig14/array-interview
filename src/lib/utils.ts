@@ -6,6 +6,26 @@ export function formatCurrency(amount: number, currency = "USD"): string {
   }).format(amount);
 }
 
+/**
+ * Format an API account type string for display.
+ * Each underscore-separated word is title-cased unless it is a known acronym.
+ * e.g. "CHECKING" → "Checking", "MONEY_MARKET" → "Money Market",
+ *      "CD" → "CD", "IRA" → "IRA"
+ */
+const ACCOUNT_TYPE_ACRONYMS = new Set(["CD", "IRA", "HSA"]);
+
+export function formatAccountType(type: string): string {
+  return type
+    .toUpperCase()
+    .split("_")
+    .map((word) =>
+      ACCOUNT_TYPE_ACRONYMS.has(word)
+        ? word
+        : word.charAt(0) + word.slice(1).toLowerCase(),
+    )
+    .join(" ");
+}
+
 /** Format a date string as "Mon D" (e.g. "Feb 3"). Handles both date-only
  *  strings ("2026-02-03") and full ISO timestamps ("2026-02-03T13:52:38Z"). */
 export function formatDate(dateStr: string): string {

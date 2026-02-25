@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { EnrichedAccount } from "$lib/types";
-  import { formatCurrency } from "$lib/utils";
+  import { formatCurrency, formatAccountType } from "$lib/utils";
 
   export let account: EnrichedAccount;
 
@@ -35,7 +35,9 @@
       <span aria-hidden="true">{maskAccountNumber(account.account_number)}</span
       >
       <span class="sr-only">{account.account_number.slice(-4)}</span>
-      <span class="account-type"> {account.account_type}</span>
+      <span class="account-type">
+        {formatAccountType(account.account_type)}</span
+      >
     </p>
     <p class="account-card__number">
       <span
@@ -114,7 +116,6 @@
     font-size: var(--text-sm-fs);
     font-weight: var(--fw-medium);
     letter-spacing: var(--text-ls-tight);
-    line-height: var(--text-sm-lh);
     flex-shrink: 0;
     background-color: var(--c-gray-lighter-b);
     color: var(--c-black);

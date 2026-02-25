@@ -1,5 +1,10 @@
 import { describe, it, expect } from "vitest";
-import { formatCurrency, formatDate, formatDateLong } from "$lib/utils";
+import {
+  formatCurrency,
+  formatDate,
+  formatDateLong,
+  formatAccountType,
+} from "$lib/utils";
 
 // ─── formatCurrency ───────────────────────────────────────────────────────────
 
@@ -81,5 +86,45 @@ describe("formatDateLong", () => {
 
   it("returns an em-dash for an empty string", () => {
     expect(formatDateLong("")).toBe("—");
+  });
+});
+
+// ─── formatAccountType ────────────────────────────────────────────────────────
+
+describe("formatAccountType", () => {
+  it("title-cases a single-word type", () => {
+    expect(formatAccountType("CHECKING")).toBe("Checking");
+  });
+
+  it("title-cases a single-word savings type", () => {
+    expect(formatAccountType("SAVINGS")).toBe("Savings");
+  });
+
+  it("title-cases each word in a multi-word type", () => {
+    expect(formatAccountType("MONEY_MARKET")).toBe("Money Market");
+  });
+
+  it("title-cases each word in a compound business type", () => {
+    expect(formatAccountType("BUSINESS_CHECKING")).toBe("Business Checking");
+  });
+
+  it("preserves CD as an acronym", () => {
+    expect(formatAccountType("CD")).toBe("CD");
+  });
+
+  it("preserves IRA as an acronym", () => {
+    expect(formatAccountType("IRA")).toBe("IRA");
+  });
+
+  it("preserves HSA as an acronym", () => {
+    expect(formatAccountType("HSA")).toBe("HSA");
+  });
+
+  it("handles lowercase input", () => {
+    expect(formatAccountType("checking")).toBe("Checking");
+  });
+
+  it("handles mixed-case input", () => {
+    expect(formatAccountType("sAvInGs")).toBe("Savings");
   });
 });
