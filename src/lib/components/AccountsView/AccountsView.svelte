@@ -10,6 +10,7 @@
   export let error: string | null = null;
 
   $: totalBalance = accounts.reduce((sum, a) => sum + a.balance, 0);
+  $: balanceValid = !isNaN(totalBalance);
 </script>
 
 <section aria-label="Accounts overview">
@@ -26,12 +27,19 @@
         <!-- Summary banner -->
         <div class="summary-banner" aria-label="Account summary">
           <p class="summary-banner__label">Total balance</p>
-          <p
-            class="summary-banner__value"
-            aria-label="Total balance {formatCurrency(totalBalance)}"
-          >
-            {formatCurrency(totalBalance)}
-          </p>
+          {#if balanceValid}
+            <p
+              class="summary-banner__value"
+              aria-label="Total balance {formatCurrency(totalBalance)}"
+            >
+              {formatCurrency(totalBalance)}
+            </p>
+          {:else}
+            <p class="summary-banner__value summary-banner__value--unavailable">
+              A network error occurred and the total is not currently available.
+              Please try again later.
+            </p>
+          {/if}
 
           <p class="summary-banner__accounts">
             Across {accounts.length} accounts
@@ -146,6 +154,11 @@
     font-size: var(--number-fs);
     font-weight: var(--fw-bold);
     margin-bottom: var(--s-3);
+  }
+
+  .summary-banner__value--unavailable {
+    font-size: var(--text-sm-fs);
+    font-weight: var(--fw-base);
   }
 
   .summary-banner__accounts {

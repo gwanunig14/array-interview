@@ -24,7 +24,9 @@
         class="account-card__balance"
         class:account-card__balance-negative={account.balance < 0}
       >
-        {formatCurrency(account.balance, account.currency)}
+        {isNaN(account.balance)
+          ? "Network Error. Please try again later."
+          : formatCurrency(account.balance, account.currency)}
       </p>
     </div>
   </div>

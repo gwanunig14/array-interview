@@ -41,10 +41,9 @@
             class:transfer-amount--negative={isOutbound}
             class:transfer-amount--positive={!isOutbound}
           >
-            {isOutbound ? "-" : "+"}{formatCurrency(
-              transfer.amount,
-              transfer.currency,
-            )}
+            {isOutbound ? "-" : "+"}{isNaN(transfer.amount)
+              ? "—"
+              : formatCurrency(transfer.amount, transfer.currency)}
           </span>
         </li>
       {/each}

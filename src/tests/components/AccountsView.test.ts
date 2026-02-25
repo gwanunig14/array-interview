@@ -3,6 +3,53 @@ import { render, screen } from "@testing-library/svelte";
 import AccountsView from "$lib/components/AccountsView/AccountsView.svelte";
 import { enrichedChecking, enrichedSavings } from "../fixtures";
 
+describe("AccountsView – failed API calls", () => {
+  it("renders network error message", () => {
+    render(AccountsView, {
+      accounts: [],
+      error: "Failed to fetch",
+    });
+    expect(screen.getByRole("alert")).toBeInTheDocument();
+    expect(screen.getByText("Failed to fetch")).toBeInTheDocument();
+  });
+
+  it("renders 500 Internal Server Error message", () => {
+    render(AccountsView, {
+      accounts: [],
+      error: "Internal Server Error",
+    });
+    expect(screen.getByText("Internal Server Error")).toBeInTheDocument();
+  });
+
+  it("renders 401 Unauthorized message", () => {
+    render(AccountsView, {
+      accounts: [],
+      error: "Unauthorized: invalid API key",
+    });
+    expect(
+      screen.getByText("Unauthorized: invalid API key"),
+    ).toBeInTheDocument();
+  });
+
+  it("renders timeout error message", () => {
+    render(AccountsView, {
+      accounts: [],
+      error: "Request timed out",
+    });
+    expect(screen.getByText("Request timed out")).toBeInTheDocument();
+  });
+
+  it("renders fallback message when error has no detail", () => {
+    render(AccountsView, {
+      accounts: [],
+      error: "Failed to load account data.",
+    });
+    expect(
+      screen.getByText("Failed to load account data."),
+    ).toBeInTheDocument();
+  });
+});
+
 describe("AccountsView – loading state", () => {
   it("shows the loading spinner copy when loading=true", () => {
     render(AccountsView, { accounts: [], loading: true });
@@ -39,6 +86,35 @@ describe("AccountsView – error state", () => {
       error: "Something went wrong",
     });
     expect(container.querySelector(".accounts-grid")).not.toBeInTheDocument();
+  });
+});
+
+describe("AccountsView – malformed account data", () => {
+  const malformedAccount = {
+    ...enrichedChecking,
+    balance: undefined as unknown as number,
+  };
+
+  it("shows the unavailable message when balance is missing", () => {
+    render(AccountsView, {
+      accounts: [malformedAccount],
+      loading: false,
+      error: null,
+    });
+    expect(
+      screen.getByText(
+        "A network error occurred and the total is not currently available. Please try again later.",
+      ),
+    ).toBeInTheDocument();
+  });
+
+  it("does NOT show $NaN when balance is missing", () => {
+    render(AccountsView, {
+      accounts: [malformedAccount],
+      loading: false,
+      error: null,
+    });
+    expect(screen.queryByText(/\$NaN/)).not.toBeInTheDocument();
   });
 });
 
