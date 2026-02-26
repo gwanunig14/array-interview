@@ -41,6 +41,8 @@ NORTHWIND_API_BASE_URL=https://<your-northwind-api-host>
 NORTHWIND_API_KEY=<your-api-key>
 ```
 
+**Reviewer note:** After copying `.env.example` to `.env`, set `NORTHWIND_API_KEY` to a valid key before running the app. Without a valid key, account and transfer API requests will fail.
+
 ---
 
 ## Quick Start
@@ -51,15 +53,21 @@ NORTHWIND_API_KEY=<your-api-key>
    npm install
    ```
 
-2. Create `.env` in the project root (see above).
+2. Create `.env` from the provided template:
 
-3. Start the app:
+```sh
+cp .env.example .env
+```
+
+3. Set `NORTHWIND_API_KEY` in `.env` to a valid API key.
+
+4. Start the app:
 
    ```sh
    npm run dev
    ```
 
-4. Optional: open browser automatically:
+5. Optional: open browser automatically:
 
    ```sh
    npm run dev -- --open
