@@ -10,6 +10,26 @@ This README is intended as a handoff guide for future maintainers.
 
 ---
 
+## Assessment Notes
+
+I had two questions while following the instructions that I was not able to get answered in time:
+
+1. **Accounts returned from API**
+
+- While pulling from the API, I found accounts from multiple users.
+- The design included no login flow or user selection guidance, and the instructions did not mention this case.
+- To meet the deadline, I assumed all fetched accounts should be treated as belonging to the current user, since fetching accounts returns all of them.
+
+2. **Figma transfer label typo**
+
+- The transfer categories appeared as:
+  - Transfer From (the transfer from account)
+  - Transfer To (the transfer to account)
+  - Transfer To (the transfer amount)
+- I assumed the third label was a typo and implemented it as **Transfer Amount**.
+
+---
+
 ## Runtime and Prerequisites
 
 - Node.js: **^24.12.0**
