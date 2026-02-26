@@ -20,7 +20,7 @@ I had two questions while following the instructions that I was not able to get 
 - The design included no login flow or user selection guidance, and the instructions did not mention this case.
 - To meet the deadline, I assumed all fetched accounts should be treated as belonging to the current user, since fetching accounts returns all of them.
 
-2. **Figma transfer label typo**
+2. **Apparent Figma transfer label typo**
 
 - The transfer categories appeared as:
   - Transfer From (the transfer from account)
